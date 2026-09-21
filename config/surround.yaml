@@ -1,0 +1,46 @@
+# Complete configuration for the six-camera surround-view node.
+#
+# Before running on another vehicle, replace only camchain_file and
+# rig_calibration_file with that vehicle's calibration files.
+/**:
+  ros__parameters:
+    # Leave empty to use the bundled Kalibr calibration with embedded ego poses.
+    # Set this to a different camchain for another vehicle.
+    camchain_file: ''
+
+    # Optional legacy rig JSON. The bundled camchain already embeds its poses.
+    rig_calibration_file: ''
+
+    # Input selection and output.
+    camera_name: ALL
+    topic_suffix_override: /image_raw/compressed
+    output_topic: /surround/ipm
+    output_frame: base_link
+    publish_rate: 5.0
+
+    # Reject an all-camera frame set when header stamps differ by more than this.
+    max_frame_span: 0.15
+    blend_mode: winner
+
+    # Ego-centred BEV bounds, in metres: X forward and Y left.
+    camera_aligned_output: false
+    x_min: -20.0
+    x_max: 20.0
+    y_min: -20.0
+    y_max: 20.0
+    meters_per_pixel: 0.05
+
+    # Hide the vehicle footprint because it is not part of the ground plane.
+    mask_vehicle: true
+    vehicle_length: 5.2
+    vehicle_width: 2.3
+    vehicle_center_x: 0.0
+
+    # Used only if rig_calibration_file is empty. These describe cam0 in ego:
+    # X forward, Y left, Z up, and degrees about the ego axes.
+    camera_height: 1.7
+    camera_forward_offset: 1.5
+    camera_left_offset: 0.0
+    camera_roll_deg: 0.0
+    camera_pitch_deg: 0.0
+    camera_yaw_deg: 0.0
