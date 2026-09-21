@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+build/
+install/
+log/
+
+# Machine-specific calibration and run settings.
+config/*.local.yaml
+config/mduc_yaza_hybrid_camchain.yaml
